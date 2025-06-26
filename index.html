@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YS Study Focus</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background-color: #f8f8f8;
+      color: #333;
+    }
+    header {
+      position: relative;
+      height: 100vh;
+      background-color: #000;
+      color: yellow;
+      overflow: hidden;
+    }
+    .menu-icon {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 30px;
+      cursor: pointer;
+      color: white;
+      z-index: 1001;
+    }
+    .nav-menu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background-color: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      z-index: 1000;
+    }
+    .nav-menu a {
+      display: block;
+      color: white;
+      margin-bottom: 10px;
+      text-decoration: none;
+    }
+
+    header img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .text-overlay {
+      position: absolute;
+      top: 30%;
+      left: 5%;
+      width: 90%;
+      z-index: 1;
+      color: white;
+    }
+    .text-overlay h3 {
+      font-size: 18px;
+    }
+    .text-overlay h1 {
+      font-size: 26px;
+      margin: 10px 0;
+    }
+    .start-btn {
+      background-color: red;
+      color: white;
+      padding: 10px 20px;
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 4px;
+    }
+
+    .about-section {
+      display: flex;
+      padding: 40px;
+      background-color: #fff;
+      flex-wrap: wrap;
+    }
+    .about-text {
+      flex: 1;
+      padding-right: 20px;
+    }
+    .about-text h2 {
+      margin-bottom: 10px;
+    }
+    .collage {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .collage-preview {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .collage-preview img {
+      width: 100px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .collage-preview img.middle {
+      transform: translateY(10px);
+      z-index: 1;
+    }
+
+    .programmes-bar {
+      background-color: #eee;
+      padding: 20px;
+      text-align: center;
+    }
+    .uni-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      max-width: 400px;
+      margin: 10px auto 0;
+    }
+    .uni-grid div {
+      background-color: #fff;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+
+    footer {
+      background-color: #004080;
+      color: white;
+      padding: 40px 20px;
+    }
+    .footer-container {
+      max-width: 1000px;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+    }
+    .footer-logo {
+      flex: 1 1 100%;
+      margin-bottom: 20px;
+    }
+    .footer-logo img {
+      width: 150px;
+      max-width: 100%;
+    }
+    .office {
+      flex: 1 1 45%;
+      text-align: left;
+    }
+    .office.right {
+      text-align: right;
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 30px;
+    }
+    @media (max-width: 768px) {
+      .office {
+        flex: 1 1 100%;
+        text-align: center !important;
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+    <div class="nav-menu" id="navMenu">
+      <a href="#">Home</a>
+      <a href="#about">About Us</a>
+      <a href="university-requirements.html">Learn Requirements</a>
+      <a href="#contact">Contact Us</a>
+    </div>
+    <img src="yscover.png" alt="YS Cover">
+    <div class="text-overlay">
+      <h3>STUDENT GATEWAY TO MALAYSIA</h3>
+      <h1>YS STUDY FOCUS, THE BEST AND THE MOST TRUSTED PLACE TO START YOUR PROCESSING FOR MALAYSIA</h1>
+      <a href="https://forms.gle/iFXQ3ohvY4JqCbWA9" target="_blank" class="start-btn">START YOUR PROCESSING</a>
+    </div>
+  </header>
+
+  <section class="about-section" id="about">
+    <div class="about-text">
+      <h2>ABOUT US</h2>
+      <p><strong>YS Study Focus</strong> is a trusted and officially authorized student placement agency, <strong>recognized by top Malaysian universities</strong>. Since our founding in 2024 by <strong>Sabrina Jannat Suchana</strong>, we’ve become a reliable name for international student services — built on transparency, care, and results.</p>
+      <p>We proudly maintain <strong>official partnerships with 6 leading universities</strong> and have successfully processed over <strong>240 student applications</strong>. Our students have gained admission to prestigious institutions including:
+      <br><em>City University, Alfa University, UCMI, UPM, King’s University, Asia e University, INTI International University, SEGi University</em>, and many more.</p>
+      <p>Today, <strong>our team of 8 dedicated agents</strong> is actively guiding students from start to finish — ensuring a smooth transition into Malaysian universities. From choosing the right program to visa and document support, <strong>YS Study Focus is with you every step of the way</strong>.</p>
+      <p><em>Our mission is simple:</em> to open doors for students through quality education, genuine guidance, and dependable support.</p>
+    </div>
+    <div class="collage-preview" id="collagePreview">
+      <img src="inti.jpeg" alt="INTI University">
+      <img src="cityu.jpg" class="middle" alt="City University">
+      <img src="iukl.jpg" alt="IUKL">
+    </div>
+  </section>
+
+  <section class="programmes-bar" id="requirements">
+    <h2>University Programmes and Tuition fees</h2>
+    <div class="uni-grid">
+      <div><a href="city-university.html" style="text-decoration:none; color:inherit;">City University</a></div>
+      <div><a href="iukl-fees.html" style="text-decoration:none; color:inherit;">IUKL</a></div>
+      <div>King's University</div>
+      <div>Alfa University</div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="footer-container">
+      <div class="footer-logo">
+        <img src="ys_logo.png" alt="YS Logo">
+      </div>
+      <div class="office left">
+        <p><strong>Bangladesh Office</strong><br>
+        Aot# A5, House: 16<br>
+        Road: 2/3, Block L<br>
+        Bonani, Chairman Bari, Dhanmondi 1213</p>
+      </div>
+      <div class="office right">
+        <p><strong>Malaysia Office</strong><br>
+        De Tropicana,<br>
+        52, Jalan Kuchai Maju 13<br>
+        Kuchai Entrepreneurs Park<br>
+        58200 Kuala Lumpur, Malaysia</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p style="font-size: 16px; margin-top: 20px;">
+         +60 115 111 4520
+      </p>
+      <p style="margin-top: 10px;">
+        Facebook: <a href="https://www.facebook.com/people/YS-Study-Focus/61571694410231/#" target="_blank" style="color: #4ea1f3; text-decoration: none;">YS Study Focus</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('navMenu');
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
+
+</body>
+</html>
