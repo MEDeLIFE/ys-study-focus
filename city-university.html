@@ -421,9 +421,9 @@ function downloadPDF(programKey) {
   const lastDownload = localStorage.getItem(key);
   const now = new Date().getTime();
 
-  if (lastDownload && now - lastDownload < 24 * 60 * 60 * 1000) {
-    alert("You already downloaded the pdf in the last 24h");
-    return;
+  if (lastDownload) {
+    const confirmDownload = confirm("You already downloaded this Fees Structure. Download again?");
+    if (!confirmDownload) return; // user clicked NO
   }
 
   // Store timestamp
@@ -431,12 +431,14 @@ function downloadPDF(programKey) {
 
   // Trigger file download
   const link = document.createElement("a");
-  link.href = "https://github.com/yourusername/yourrepo/cityu-fees-2025.pdf";  // <-- replace with your GitHub raw link
+  link.href = "https://github.com/yourusername/yourrepo/cityu-fees-2025.pdf"; // replace with actual link
   link.download = "CityU_Fee_Structure_2025.pdf";
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
 }
+
+
 
 </script>
 
