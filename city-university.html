@@ -2,445 +2,1144 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>City University Malaysia – International Fee Structure 2025</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YS Study Focus</title>
   <style>
-    body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0 0 80px 0; /* space for footer */
-  background: #f9f9f9;
-}
-
-    header {
-  background: #004080;
-  color: white;
-  padding: 20px;
-  text-align: center;
-}
-footer {
-  background: #004080;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  width: 100%;
-}
-
-html, body {
-  height: 100%;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-}
-
-.container {
-  flex: 1;
-}
-
-
-
-    h1, h2 {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
     }
-    .container {
-      max-width: 1100px;
-      margin: 20px auto;
-      padding: 0 15px;
-    }
-    .accordion {
-      background-color: #0066cc;
-      color: white;
-      cursor: pointer;
-      padding: 16px;
-      margin-bottom: 10px;
-      border: none;
-      outline: none;
-      text-align: left;
-      font-size: 18px;
-      transition: 0.4s;
-      border-radius: 5px;
-    }
-    .active, .accordion:hover {
-      background-color: #005bb5;
-    }
-    .panel {
-      padding: 0 15px;
-      background-color: white;
-      display: none;
+    body {
+  background-color: #f8f8f8;
+  color: #333;
+  overflow-x: hidden; /* Add this to prevent horizontal scrolling */
+  width: 100%;        /* Ensure it stays locked to viewport width */
+}
+    header {
+      position: relative;
+      height: 100vh;
+      background-color: #000;
+      color: yellow;
       overflow: hidden;
-      border-left: 5px solid #005bb5;
-      margin-bottom: 15px;
     }
-    table {
+    /* Container for top right icons */
+.top-right-actions {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 20px; 
+  z-index: 1001;
+  align-items: center;
+}
+
+/* Style for both the Search and Menu icons */
+.action-icon {
+  font-size: 30px;
+  cursor: pointer;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.action-icon:hover {
+  color: #FFD700; /* Golden hover effect */
+}
+
+/* We remove absolute position from the old menu-icon so it stays inside the flex container */
+.menu-icon {
+  position: static !important;
+}
+    .nav-menu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background-color: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      z-index: 1000;
+    }
+    .nav-menu a {
+      display: block;
+      color: white;
+      margin-bottom: 10px;
+      text-decoration: none;
+    }
+
+    header img {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      border-collapse: collapse;
-      margin: 15px 0;
-      font-size: 14px;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
     }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: left;
+
+    .text-overlay {
+      position: absolute;
+      top: 30%;
+      left: 5%;
+      width: 90%;
+      z-index: 1;
+      color: white;
     }
-    th {
-      background-color: #f2f2f2;
+    .text-overlay h3 {
+      font-size: 18px;
     }
-    .note {
-      background: #fff8e1;
-      border-left: 4px solid #ffeb3b;
-      padding: 10px;
-      margin: 15px 0;
+    .text-overlay h1 {
+      font-size: 26px;
+      margin: 10px 0;
     }
-    .divider {
-      border-top: 2px solid #ccc;
-      margin: 20px 0;
+    .start-btn {
+      background-color: red;
+      color: white;
+      padding: 10px 20px;
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 4px;
     }
-    .search-container {
-      margin-bottom: 20px;
+
+    .about-section {
+      display: flex;
+      padding: 40px;
+      background-color: #fff;
+      flex-wrap: wrap;
+    }
+    .about-text {
+      flex: 1;
+      padding-right: 20px;
+    }
+    .about-text h2 {
+      margin-bottom: 10px;
+    }
+    .collage {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .collage-preview {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .collage-preview img {
+      width: 100px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .collage-preview img.middle {
+      transform: translateY(10px);
+      z-index: 1;
+    }
+
+    .programmes-bar {
+      background-color: #eee;
+      padding: 20px;
       text-align: center;
     }
-    .search-container input[type="text"] {
+    .uni-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      max-width: 400px;
+      margin: 10px auto 0;
+    }
+    .uni-grid div {
+      background-color: #fff;
       padding: 10px;
-      width: 100%;
-      max-width: 500px;
       border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 16px;
     }
-    tr.highlight {
-      background-color: #ffff99 !important;
+
+    footer {
+      background-color: #004080;
+      color: white;
+      padding: 30px 20px 10px 20px; /* Slimmer footer */
     }
-    .download-icon {
-  float: right;
-  font-size: 20px;
-  cursor: pointer;
+    .footer-container {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .footer-logo {
+      order: 2; /* Logo in the middle */
+      flex: 0 0 auto;
+      text-align: center;
+    }
+    .footer-logo img {
+      width: 130px; 
+      height: auto;
+    }
+    .office {
+      flex: 1;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+    .office.left {
+      order: 1;
+      text-align: left;
+    }
+    .office.right {
+      order: 3;
+      text-align: right;
+    }
+    .footer-bottom {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 0;
+      min-height: 80px; 
+    }
+    /* SLIM DEVELOPER BAR */
+    .developer-bar {
+      background-color: #001a33; 
+      color: #888; 
+      padding: 5px 0; /* Very slim */
+      text-align: center; 
+      font-size: 11px; 
+      width: 100%;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    @media (max-width: 768px) {
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      .office.left, .office.right {
+        text-align: center;
+        order: 3;
+      }
+      .footer-logo {
+        order: 1;
+        margin-bottom: 15px;
+      }
+    }
+    
+    .search-section {
+  background-color: #f0f8ff; /* light blue to stand out from About Us */
+  padding: 30px;
+  text-align: center;
 }
 
-.download-icon:hover {
-  opacity: 0.8;
+.search-section h2 {
+  margin-bottom: 15px;
 }
-.download-bar {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-top: 15px;
-  padding: 5px 10px;
-  background: #e6f0ff;
-  border-radius: 5px;
+
+.search-box {
+  display: inline-flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.search-bar {
+  padding: 10px 15px;
+  width: 100%;      /* Change from 250px */
+  max-width: 400px; /* Allows it to grow on desktop but stay contained */
+  border: 2px solid #007BFF;
+  border-radius: 25px;
+  font-size: 16px;
+}
+
+.search-box button {
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+}
+#searchResults p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+#searchResults button {
+  padding: 5px 12px;
+  border: none;
+  background-color: #007BFF;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
   font-size: 14px;
-  cursor: pointer;
-  width: fit-content;
-  float: right;
 }
 
-.download-bar span {
-  margin-right: 5px;
+#searchResults button:hover {
+  background-color: #0056b3;
+}
+.uni-grid {
+  display: grid;
+  /* This automatically fits as many 150px columns as possible */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+  gap: 10px;
+  max-width: 1000px;
+  margin: 10px auto 0;
+  width: 90%; /* Ensures it doesn't touch screen edges on mobile */
+}
+
+.uni-grid div {
+  background-color: #fff;      /* old white box */
+  padding: 10px;               /* old padding */
+  border: 1px solid #ccc;      /* old border style */
+  text-align: center;
+  font-weight: normal;          /* keep old text style */
+  border-radius: 0;             /* no rounded corners, like old design */
+}
+
+/* Creative Square Card Design */
+.about-section {
+  padding: 40px 0 !important; /* Reduces vertical empty space */
+  background-color: #f8f8f8; /* Matches your body background */
+}
+
+.stats-row {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 25px; /* Space between the squares */
+  max-width: 1000px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  background: white;
+  padding: 30px 20px;
+  width: 280px; /* Fixed square-ish width */
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  text-align: center;
+  transition: all 0.3s ease;
+  border-bottom: 5px solid #004080; /* Branding accent */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Creativity: Hover Animation */
+.stat-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0,64,128,0.15);
+}
+
+.stat-icon-circle {
+  width: 70px;
+  height: 70px;
+  background-color: #004080;
+  border-radius: 18px; /* Slightly rounded square icon */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 15px;
+  color: yellow; /* High contrast from your brand colors */
+  font-size: 28px;
+  animation: pulse-blue 2s infinite; /* Continuous subtle animation */
+}
+
+@keyframes pulse-blue {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 64, 128, 0.4); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(0, 64, 128, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 64, 128, 0); }
+}
+
+.stat-card h2 {
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.stat-card p b {
+  display: block;
+  font-size: 16px;
+  color: #000;
+}
+
+.stat-subtext {
+  font-size: 10px !important; /* Smaller text */
+  font-style: italic;
+  color: #999;
+  margin-top: 8px;
+}
+/* --- THE GOLDEN SNAKE EFFECT --- */
+
+/* 1. This class makes the middle card act as a container for the light */
+.middle-card {
+  position: relative;
+  overflow: hidden; /* This "clips" the light so it only shows at the edge */
+  border-bottom: none !important; /* Removes the static blue line to let the gold shine */
+  z-index: 1;
+}
+
+/* 2. The Golden Light (The Snake) */
+.middle-card::before {
+  content: '';
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  /* A conic gradient creates the single "head" of the snake */
+  background: conic-gradient(transparent, transparent, transparent, #FFD700); 
+  left: -25%;
+  top: -25%;
+  animation: rotate-snake 4s linear infinite;
+  z-index: -2;
+}
+
+/* 3. The Inner Cover (Keeps the card white inside) */
+.middle-card::after {
+  content: '';
+  position: absolute;
+  inset: 4px; /* Adjust this (e.g., 2px or 5px) to change the snake's thickness */
+  background: white;
+  border-radius: 16px; /* Matches your card's 20px radius minus the 4px inset */
+  z-index: -1;
+}
+
+/* 4. Animation: 360 to 0 makes it travel Anti-Clockwise */
+@keyframes rotate-snake {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+/* Styling for the new Header Section */
+.about-header {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 40px;
+  padding: 0 20px;
+}
+
+.about-header h2 {
+  color: #004080; /* Your Brand Blue */
+  font-size: 36px;
   font-weight: bold;
-  color: #004080;
+  margin-bottom: 15px;
 }
 
-.download-bar:hover {
-  background: #ffefe1;
+.about-header p {
+  max-width: 800px;
+  margin: 0 auto;
+  color: #444;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* Ensure the about section centers everything vertically */
+.about-section {
+  display: flex;
+  flex-direction: column; /* Stacks header over cards */
+  align-items: center;
+  padding: 60px 0 !important;
+  background-color: #f8f8f8;
+}
+
+/* Container for top right icons */
+.top-right-actions {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 20px; /* Space between search and menu icon */
+  z-index: 1001;
+  align-items: center;
+}
+
+/* Container for top right icons */
+.top-right-actions {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 15px; 
+  z-index: 1001;
+  align-items: center;
+}
+
+/* Matching button style for both icons */
+.action-icon {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px; /* Uniform size for both icons */
+  cursor: pointer;
+  color: white;
+  background: rgba(255, 255, 255, 0.1); /* Subtle background circle */
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.action-icon:hover {
+  background: rgba(255, 255, 255, 0.3);
+  color: #FFD700; /* Golden hover */
+  transform: scale(1.1);
+}
+
+/* Ensure menu-icon behaves as a child of the flex container */
+.menu-icon {
+  position: static !important;
+}
+
+/* Update the existing menu-icon to remove its absolute positioning */
+.menu-icon {
+  position: static; /* Overriding previous absolute position */
+}
+
+/* Tight, clean footer bar by default */
+.footer-bottom {
+  position: relative;
+  padding: 20px 0; /* Minimal space when closed */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: padding 0.5s ease; /* Smooth expansion */
+}
+
+/* When the menu is active, increase padding to fit the icons */
+.footer-bottom:has(.menu.active) {
+  padding: 100px 0; 
+}
+
+.menu {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.menu .toggle {
+  position: relative;
+  height: 60px;
+  width: 60px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: 1.25s;
+  z-index: 5;
+}
+
+/* Standard animation logic */
+.menu.active .toggle { transform: rotate(315deg); }
+
+.menu li {
+  position: absolute;
+  list-style: none;
+  transition: 0.5s;
+  transform: rotate(calc(360deg / 8 * var(--i))) translateX(0px);
+  scale: 0;
+  opacity: 0;
+}
+
+.menu.active li {
+  transform: rotate(calc(360deg / 8 * var(--i))) translateX(-95px); 
+  scale: 1;
+  opacity: 1;
+}
+
+.menu li a {
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: var(--clr);
+  box-shadow: 0 3px 4px rgba(0,0,0,0.15);
+  transition: 0.5s;
+  transform: rotate(calc(360deg / -8 * var(--i))); 
+}
+
+.contact-cta-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 10%;
+  background-color: #ffffff;
+  gap: 50px;
+  flex-wrap: wrap;
+  overflow: hidden; /* Add this to "clip" the plane and fireworks */
+  position: relative;
+}
+
+.contact-left {
+  flex: 1.2;
+  min-width: 320px;
+}
+
+.contact-left h2 {
+  font-size: 48px;
+  color: #004080;
+  margin-bottom: 15px;
+  font-weight: 800;
+}
+
+/* --- UPDATED WHATSAPP BUTTON WITH ANIMATIONS --- */
+.whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #25d366;
+  color: white !important;
+  padding: 18px 35px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+  
+  /* Applying the continuous pulse animation */
+  animation: pulse-green 2s infinite, wiggle 5s infinite;
+}
+
+/* 1. The Pulse Effect (Glowing outer ring) */
+@keyframes pulse-green {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* 2. The Wiggle Effect (Subtle shake every 5 seconds) */
+@keyframes wiggle {
+  0%, 90%, 100% { transform: rotate(0); }
+  92% { transform: rotate(3deg); }
+  94% { transform: rotate(-3deg); }
+  96% { transform: rotate(2deg); }
+  98% { transform: rotate(-2deg); }
+}
+
+/* 3. The Shimmer (White light passing through the button) */
+.whatsapp-btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 20%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: rotate(30deg);
+  transition: none;
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -60%; }
+  20% { left: 120%; }
+  100% { left: 120%; }
+}
+
+.whatsapp-btn:hover {
+  background-color: #1ebe57;
+  transform: translateY(-5px) scale(1.05); /* Lifts up and grows slightly */
+  animation: none; /* Stop pulsing when user is hovering */
+  box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
+}
+
+.contact-right {
+  flex: 0.8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 300px;
+}
+
+.photo-collage {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.collage-img {
+  width: 130px;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.collage-img.tall {
+  height: 240px;
+  border: 4px solid #fff;
+}
+
+.collage-img:hover {
+  transform: scale(1.1) rotate(2deg);
+  z-index: 5;
+}
+
+@media (max-width: 480px) {
+  .text-overlay h1 {
+    font-size: 20px; /* Smaller font for small phones */
+  }
+  .text-overlay {
+    top: 20%; /* Move up slightly to avoid covering faces in background */
+  }
+  .contact-left h2 {
+    font-size: 32px; /* Prevent massive title from breaking layout */
+  }
+  .whatsapp-btn {
+    padding: 15px 25px;
+    font-size: 16px;
+    width: 100%; /* Full width button is easier to click on mobile */
+    justify-content: center;
+  }
+}
+
+/* --- PAPER PLANE & FIREWORK STYLES --- */
+#flight-path {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Allows clicking through to the button */
+  z-index: 100;
+}
+
+.paper-plane {
+  position: absolute;
+  color: #004080; /* Match your brand blue */
+  font-size: 24px;
+  offset-path: path("M 250,80 C 300,200 150,250 200,300 C 400,450 800,200 1100,100"); /* The "Smooth" line */
+  animation: fly 4s infinite linear;
+  opacity: 0;
+}
+
+@keyframes fly {
+  0% { offset-distance: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+/* Firework Particles */
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 101;
 }
 
   </style>
 </head>
 <body>
 
-<header>
-  <h1>City University Malaysia</h1>
-  <h2>International Fee Structure 2025</h2>
-  <p>Valid from 1st January 2025 until 31st December 2025</p>
+  <header>
+  <div class="top-right-actions">
+    <div class="action-icon" onclick="scrollToSearch()" title="Search">
+      <i class="fas fa-search"></i>
+    </div>
+    
+    <div class="action-icon menu-icon" onclick="toggleMenu()" title="Menu">
+      <i class="fas fa-bars"></i>
+    </div>
+  </div>
+
+  <div class="nav-menu" id="navMenu">
+    <a href="#">Home</a>
+    <a href="#about">About Us</a>
+    <a href="university-requirements.html">Learn Requirements</a>
+    <a href="#contact">Contact Us</a>
+  </div>
+  
+  <img src="yscover.png" alt="YS Cover">
+  <div class="text-overlay">
+    <h3>STUDENT GATEWAY TO MALAYSIA</h3>
+    <h1>YS STUDY FOCUS, THE BEST AND THE MOST TRUSTED PLACE TO START YOUR PROCESSING FOR MALAYSIA</h1>
+    <a href="https://forms.gle/iFXQ3ohvY4JqCbWA9" target="_blank" class="start-btn">START YOUR PROCESSING</a>
+  </div>
 </header>
 
-<div class="container">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-  <div class="search-container">
-    <input type="text" id="searchInput" placeholder="Search program name..." onkeyup="filterPrograms()" />
+
+<section class="about-section" id="about">
+  <div class="about-header">
+    <h2>Top Reasons to Choose YSSF</h2>
+    <p>
+      YS Study Focus provides expert, reliable guidance and direct university partnerships, 
+      ensuring a seamless transition and successful admission process for Bangladeshi students 
+      to study in Malaysia.
+    </p>
   </div>
 
-  <!-- FOUNDATION -->
-  <button class="accordion">FOUNDATION PROGRAMS</button>
-  <div class="panel">
-    <table>
-      <tr>
-        <th>No</th><th>Programme</th><th>Duration</th><th>Tuition Fees (Promo)</th><th>Resource Fee/Sem</th><th>Total</th>
-      </tr>
-      <tr><td>1</td><td>Foundation in Business</td><td>1 year</td><td>RM12,915</td><td>RM300</td><td>RM25,785</td></tr>
-      <tr><td>2</td><td>Foundation in Arts (Communication)</td><td>1 year</td><td>RM12,915</td><td>RM300</td><td>RM25,785</td></tr>
-      <tr><td>3</td><td>Foundation in Arts (English)</td><td>1 year</td><td>RM12,915</td><td>RM300</td><td>RM25,785</td></tr>
-      <tr><td>4</td><td>Foundation in Arts (Graphic Design & Multimedia)</td><td>1 year</td><td>RM12,915</td><td>RM300</td><td>RM25,785</td></tr>
-      <tr><td>5</td><td>Foundation in Arts (Built Environment)</td><td>1 year</td><td>RM12,915</td><td>RM300</td><td>RM25,785</td></tr>
-      <tr><td>6</td><td>Foundation in Arts (Fashion Design)</td><td>1 year</td><td>RM12,915</td><td>RM300</td><td>RM25,785</td></tr>
-      <tr><td>7</td><td>Foundation in Science</td><td>1 year</td><td>RM12,915</td><td>RM300</td><td>RM25,785</td></tr>
-      <tr><td>8</td><td>Foundation in Information Technology</td><td>1 year</td><td>RM12,915</td><td>RM300</td><td>RM25,785</td></tr>
-    </table>
-    <div class="note">
-      <div class="download-bar" onclick="downloadPDF('foundation')">
-  <span>Download PDF</span>
-  <span>⬇️</span>
-</div>
-      <strong>Misc Fees:</strong><br>
-      Visa & Application: RM3,150<br>
-      International Fee: RM8,000<br>
-      Completion Processing Fee: RM1,000<br>
-      <strong>Total Misc: RM12,150</strong><br><br>
-      <strong>Payment Schedule:</strong><br>
-      1st: RM3,150 (Visa & App Fee)<br>
-      2nd: 50% Tuition + RM8,000 + RM1,000 + RM900 Resource (RM300 × 3)<br>
-      Assessment Fee: RM25/subject
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-icon-circle"><i class="fas fa-university"></i></div>
+      <h2>13+</h2>
+      <p><b>Official University Partnerships</b></p>
+    </div>
+
+    <div class="stat-card middle-card">
+      <div class="stat-icon-circle"><i class="fas fa-user-graduate"></i></div>
+      <h2 id="dynamicStudentCount">68</h2>
+      <p><b>Successful Student Admissions</b></p>
+      <p class="stat-subtext">*Updated weekly based on processing</p>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon-circle"><i class="fas fa-user-tie"></i></div>
+      <h2>8</h2>
+      <p><b>Dedicated Expert Agents</b></p>
     </div>
   </div>
+</section>
 
-<button class="accordion">DIPLOMA PROGRAMS</button>
-  <div class="panel">
-    <table>
-      <tr>
-        <th>No</th><th>Programme</th><th>Faculty</th><th>Duration</th><th>Sem</th><th>Tuition Fees (Promo)</th><th>Resource Fee/Sem</th><th>Year 1</th><th>Year 2</th><th>Year 3</th><th>Total</th>
-      </tr>
-      <tr><td>1</td><td>Diploma in Fashion Design</td><td>Creative Industries</td><td>3 yrs</td><td>8</td><td>RM32,080</td><td>RM300</td><td>21,350</td><td>10,600</td><td>10,600</td><td>44,950</td></tr>
-      <tr><td>2</td><td>Diploma in Graphic Design</td><td>Creative Industries</td><td>3 yrs</td><td>8</td><td>RM32,080</td><td>RM300</td><td>21,350</td><td>10,600</td><td>10,600</td><td>44,950</td></tr>
-      <tr><td>3</td><td>Diploma in Mass Communication</td><td>Creative Industries</td><td>3 yrs</td><td>8</td><td>RM32,080</td><td>RM300</td><td>21,350</td><td>10,600</td><td>10,600</td><td>44,950</td></tr>
-      <tr><td>4</td><td>Diploma in Corporate Communication</td><td>Creative Industries</td><td>3 yrs</td><td>8</td><td>RM32,080</td><td>RM300</td><td>21,350</td><td>10,600</td><td>10,600</td><td>44,950</td></tr>
-      <tr><td>5</td><td>Diploma in Accounting</td><td>Business</td><td>3 yrs</td><td>7</td><td>RM31,780</td><td>RM300</td><td>21,350</td><td>10,600</td><td>10,600</td><td>44,650</td></tr>
-      <tr><td>6</td><td>Diploma in Business Management</td><td>Business</td><td>3 yrs</td><td>8</td><td>RM32,080</td><td>RM300</td><td>21,350</td><td>10,600</td><td>10,600</td><td>44,950</td></tr>
-      <tr><td>7</td><td>Diploma in Human Resource Management</td><td>Business</td><td>3 yrs</td><td>8</td><td>RM32,080</td><td>RM300</td><td>21,350</td><td>10,600</td><td>10,600</td><td>44,950</td></tr>
-      <tr><td>8</td><td>Diploma in Office Management</td><td>Business</td><td>3 yrs</td><td>8</td><td>RM32,080</td><td>RM300</td><td>21,350</td><td>10,600</td><td>10,600</td><td>44,950</td></tr>
-      <tr><td>9</td><td>Diploma in Islamic Banking</td><td>Business</td><td>3 yrs</td><td>8</td><td>RM32,080</td><td>RM300</td><td>21,350</td><td>10,600</td><td>10,600</td><td>44,950</td></tr>
-      <tr><td>10</td><td>Diploma in Management</td><td>Business</td><td>3 yrs</td><td>7</td><td>RM31,780</td><td>RM300</td><td>21,350</td><td>10,600</td><td>10,600</td><td>44,650</td></tr>
-      <tr><td>11</td><td>Diploma in Information Technology</td><td>Information Technology</td><td>3 yrs</td><td>7</td><td>RM31,780</td><td>RM300</td><td>21,350</td><td>10,600</td><td>10,600</td><td>44,650</td></tr>
-      <tr><td>12</td><td>Diploma in Medical Lab Technology</td><td>Allied Health Sciences</td><td>3 yrs</td><td>9</td><td>RM32,380</td><td>RM300</td><td>21,350</td><td>10,600</td><td>10,600</td><td>45,250</td></tr>
-      <tr><td>13</td><td>Diploma in Nursing</td><td>Allied Health Sciences</td><td>3 yrs</td><td>–</td><td>RM31,480</td><td>RM300</td><td>21,350</td><td>10,600</td><td>10,600</td><td>44,350</td></tr>
-      <tr><td>14</td><td>Diploma in Occupational Safety & Health</td><td>Allied Health Sciences</td><td>3 yrs</td><td>–</td><td>RM32,080</td><td>RM300</td><td>21,350</td><td>10,600</td><td>10,600</td><td>44,950</td></tr>
-      <tr><td>15</td><td>Diploma in Environmental Health</td><td>Allied Health Sciences</td><td>3 yrs</td><td>8</td><td>RM32,380</td><td>RM300</td><td>21,350</td><td>10,600</td><td>10,600</td><td>45,250</td></tr>
-      <tr><td>16</td><td>Diploma in Culinary Arts</td><td>Hospitality</td><td>3 yrs</td><td>8</td><td>RM32,080</td><td>RM300</td><td>21,350</td><td>10,600</td><td>10,600</td><td>44,950</td></tr>
-      <tr><td>17</td><td>Diploma in Hotel Management</td><td>Hospitality</td><td>3 yrs</td><td>8</td><td>RM32,080</td><td>RM300</td><td>21,350</td><td>10,600</td><td>10,600</td><td>44,950</td></tr>
-      <tr><td>18</td><td>Diploma in Early Childhood Education</td><td>Education</td><td>3 yrs</td><td>8</td><td>RM32,080</td><td>RM300</td><td>21,350</td><td>10,600</td><td>10,600</td><td>44,950</td></tr>
-      <tr><td>19</td><td>Diploma in Civil Engineering</td><td>Engineering</td><td>3 yrs</td><td>8</td><td>RM32,080</td><td>RM300</td><td>21,350</td><td>10,600</td><td>10,600</td><td>44,950</td></tr>
-      <tr><td>20</td><td>Diploma in Mechanical Engineering</td><td>Engineering</td><td>3 yrs</td><td>8</td><td>RM32,080</td><td>RM300</td><td>21,350</td><td>10,600</td><td>10,600</td><td>44,950</td></tr>
-      <tr><td>21</td><td>Diploma in Architectural Technology</td><td>Engineering</td><td>3 yrs</td><td>8</td><td>RM32,080</td><td>RM300</td><td>21,350</td><td>10,600</td><td>10,600</td><td>44,950</td></tr>
-      <tr><td>22</td><td>Diploma in Interior Design</td><td>Creative Industries</td><td>3 yrs</td><td>8</td><td>RM32,080</td><td>RM300</td><td>21,350</td><td>10,600</td><td>10,600</td><td>44,950</td></tr>
-    </table>
-    <div class="note">
-      <div class="download-bar" onclick="downloadPDF('foundation')">
-  <span>Download PDF</span>
-  <span>⬇️</span>
+<!-- UNIVERSAL SUBJECT SEARCH -->
+<section class="search-section">
+  <h2>Search subject name here to find university</h2>
+  <div class="search-box">
+    <input type="text" id="subjectInput" placeholder="Type subject name..." class="search-bar" oninput="searchUniversities()">
+    <button onclick="searchUniversities()">Search</button>
+  </div>
+  <div id="searchResults"></div>
+</section>
+
+
+
+<section class="programmes-bar" id="requirements">
+
+    <h2>University Programmes and Tuition Fees</h2>
+
+<div class="uni-grid">
+  <div id="city-university">
+    <a href="city-university.html" style="text-decoration:none; color:inherit;">City University</a>
+  </div>
+
+  <div id="iukl">
+    <a href="iukl-fees.html" style="text-decoration:none; color:inherit;">IUKL</a>
+  </div>
+
+  <div id="bac">
+    <a href="bac-university.html" style="text-decoration:none; color:inherit;">BAC</a>
+  </div>
+
+  <div id="alfa-university">
+    <a href="alfa-university.html" style="text-decoration:none; color:inherit;">Alfa University</a>
+  </div>
+
+  <div id="university-of-cyberjaya">
+    <a href="university-of-cyberjaya.html" style="text-decoration:none; color:inherit;">University of Cyberjaya</a>
+  </div>
+
+  <div id="inti">
+    <a href="inti-university.html" style="text-decoration:none; color:inherit;">INTI</a>
+  </div>
+
+  <div id="segi">
+    <a href="segi-university.html" style="text-decoration:none; color:inherit;">SEGi</a>
+  </div>
+
+  <div id="genovasi">
+    <a href="genovasi-university.html" style="text-decoration:none; color:inherit;">Genovasi</a>
+  </div>
+
+  <div id="cybernetix">
+    <a href="cybernetix-university.html" style="text-decoration:none; color:inherit;">Cybernetix</a>
+  </div>
+
+  <div id="ucmi">
+    <a href="ucmi-university.html" style="text-decoration:none; color:inherit;">UCMI</a>
+  </div>
 </div>
-      <strong>Misc Fees:</strong><br>
-      Visa & Application: RM3,150<br>
-      International Fee: RM8,000<br>
-      Completion Processing Fee: RM1,000<br>
-      <strong>Total Misc: RM12,150</strong><br><br>
-      <strong>Payment Schedule:</strong><br>
-      1st: RM3,150 (Visa & App Fee)<br>
-      2nd: 50% Year 1 Tuition + RM8,000 + RM1,000 + Resource Fee<br>
-      Assessment Fee: RM25/subject
+
+  </section>
+<section class="contact-cta-section" style="position: relative;">
+  <div id="flight-path">
+     <div class="paper-plane" id="plane"><i class="fas fa-paper-plane"></i></div>
+  </div>
+
+  <div class="contact-left">
+    <h2>Contact <span id="plane-origin">Us</span> Today!</h2>
+    <p style="margin-bottom: 30px; color: #444; font-size: 19px; line-height: 1.5;">
+      Start your journey to Malaysia with expert guidance. <br>
+      Message us now for a free consultation!
+    </p>
+    <a href="https://wa.me/601139660706" target="_blank" class="whatsapp-btn">
+      <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+    </a>
+  </div>
+
+  <div class="contact-right">
+    <div class="photo-collage" id="collage-end">
+      <img src="cityu.jpg" alt="City University" class="collage-img">
+      <img src="inti.jpeg" alt="Inti University" class="collage-img tall">
+      <img src="iukl.jpg" alt="IUKL" class="collage-img">
     </div>
   </div>
+</section>
 
-  <!-- BACHELOR -->
-  <button class="accordion">BACHELOR PROGRAMS</button>
-  <div class="panel">
-    <table>
-      <tr>
-        <th>No</th><th>Programme</th><th>Faculty</th><th>Duration</th><th>Sem</th><th>Tuition Fees (Promo)</th><th>Resource Fee/Sem</th><th>Year 1</th><th>Year 2</th><th>Year 3</th><th>Year 4</th><th>Total</th>
-      </tr>
-      <tr><td>1</td><td>Bachelor of Accounting (Hons)</td><td>Business</td><td>3 yrs</td><td>9</td><td>RM44,356</td><td>RM500</td><td>21,350</td><td>15,688</td><td>15,688</td><td>–</td><td>57,226</td></tr>
-      <tr><td>2</td><td>Bachelor of Business Admin (Hons)</td><td>Business</td><td>3 yrs</td><td>9</td><td>RM44,356</td><td>RM500</td><td>21,350</td><td>15,688</td><td>15,688</td><td>–</td><td>57,226</td></tr>
-      <tr><td>3</td><td>Bachelor of Fashion Design Technology (Hons)</td><td>Business</td><td>3 yrs</td><td>9</td><td>RM44,356</td><td>RM500</td><td>21,350</td><td>15,688</td><td>15,688</td><td>–</td><td>57,226</td></tr>
-      <tr><td>4</td><td>Bachelor of Education (Early Childhood Education) Honours</td><td>Business</td><td>3 yrs</td><td>9</td><td>RM44,356</td><td>RM500</td><td>21,350</td><td>15,688</td><td>15,688</td><td>–</td><td>57,226</td></tr>
-      <tr><td>5</td><td>Bachelor of Mass Communication (Hons)</td><td>Creative Industries</td><td>3 yrs</td><td>9</td><td>RM44,356</td><td>RM500</td><td>21,350</td><td>15,688</td><td>15,688</td><td>–</td><td>57,226</td></tr>
-<tr><td>6</td><td>Bachelor of Corporate Communication (Hons)</td><td>Creative Industries</td><td>3 yrs</td><td>9</td><td>RM44,356</td><td>RM500</td><td>21,350</td><td>15,688</td><td>15,688</td><td>–</td><td>57,226</td></tr>
-<tr><td>7</td><td>Bachelor of Graphic Design (Hons)</td><td>Creative Industries</td><td>3 yrs</td><td>9</td><td>RM44,356</td><td>RM500</td><td>21,350</td><td>15,688</td><td>15,688</td><td>–</td><td>57,226</td></tr>
-<tr><td>8</td><td>Bachelor of Interior Design (Hons)</td><td>Creative Industries</td><td>3 yrs</td><td>9</td><td>RM44,356</td><td>RM500</td><td>21,350</td><td>15,688</td><td>15,688</td><td>–</td><td>57,226</td></tr>
-<tr><td>9</td><td>Bachelor of Information Technology (Hons)</td><td>Information Technology</td><td>3 yrs</td><td>9</td><td>RM44,356</td><td>RM500</td><td>21,350</td><td>15,688</td><td>15,688</td><td>–</td><td>57,226</td></tr>
-<tr><td>10</td><td>Bachelor of Software Engineering (Hons)</td><td>Information Technology</td><td>3 yrs</td><td>9</td><td>RM44,356</td><td>RM500</td><td>21,350</td><td>15,688</td><td>15,688</td><td>–</td><td>57,226</td></tr>
-<tr><td>11</td><td>Bachelor of Medical Lab Technology (Hons)</td><td>Allied Health Sciences</td><td>3 yrs</td><td>9</td><td>RM45,250</td><td>RM500</td><td>21,350</td><td>15,900</td><td>15,900</td><td>–</td><td>57,150</td></tr>
-<tr><td>12</td><td>Bachelor of Nursing (Hons)</td><td>Allied Health Sciences</td><td>3 yrs</td><td>9</td><td>RM44,350</td><td>RM500</td><td>21,350</td><td>15,500</td><td>15,500</td><td>–</td><td>52,350</td></tr>
-<tr><td>13</td><td>Bachelor of Occupational Safety & Health (Hons)</td><td>Allied Health Sciences</td><td>3 yrs</td><td>9</td><td>RM44,950</td><td>RM500</td><td>21,350</td><td>15,750</td><td>15,750</td><td>–</td><td>52,850</td></tr>
-<tr><td>14</td><td>Bachelor of Environmental Health (Hons)</td><td>Allied Health Sciences</td><td>3 yrs</td><td>9</td><td>RM45,250</td><td>RM500</td><td>21,350</td><td>15,900</td><td>15,900</td><td>–</td><td>53,150</td></tr>
-<tr><td>15</td><td>Bachelor of Culinary Arts (Hons)</td><td>Hospitality</td><td>3 yrs</td><td>9</td><td>RM44,950</td><td>RM500</td><td>21,350</td><td>15,750</td><td>15,750</td><td>–</td><td>52,850</td></tr>
-<tr><td>16</td><td>Bachelor of Hotel Management (Hons)</td><td>Hospitality</td><td>3 yrs</td><td>9</td><td>RM44,950</td><td>RM500</td><td>21,350</td><td>15,750</td><td>15,750</td><td>–</td><td>52,850</td></tr>
-<tr><td>17</td><td>Bachelor of Early Childhood Education (Hons)</td><td>Education</td><td>3 yrs</td><td>9</td><td>RM44,950</td><td>RM500</td><td>21,350</td><td>15,750</td><td>15,750</td><td>–</td><td>52,850</td></tr>
-<tr><td>18</td><td>Bachelor of Civil Engineering (Hons)</td><td>Engineering</td><td>4 yrs</td><td>12</td><td>RM57,950</td><td>RM500</td><td>21,350</td><td>15,750</td><td>15,750</td><td>21,100</td><td>73,950</td></tr>
-<tr><td>19</td><td>Bachelor of Mechanical Engineering (Hons)</td><td>Engineering</td><td>4 yrs</td><td>12</td><td>RM57,950</td><td>RM500</td><td>21,350</td><td>15,750</td><td>15,750</td><td>21,100</td><td>73,950</td></tr>
-<tr><td>20</td><td>Bachelor of Electrical & Electronic Engineering (Hons)</td><td>Engineering</td><td>4 yrs</td><td>12</td><td>RM57,950</td><td>RM500</td><td>21,350</td><td>15,750</td><td>15,750</td><td>21,100</td><td>73,950</td></tr>
-<tr><td>21</td><td>Bachelor of Architectural Technology (Hons)</td><td>Engineering</td><td>4 yrs</td><td>12</td><td>RM57,950</td><td>RM500</td><td>21,350</td><td>15,750</td><td>15,750</td><td>21,100</td><td>73,950</td></tr>
-<tr><td>22</td><td>Bachelor of Interior Architecture (Hons)</td><td>Creative Industries</td><td>3 yrs</td><td>9</td><td>RM44,950</td><td>RM500</td><td>21,350</td><td>15,750</td><td>15,750</td><td>–</td><td>52,850</td></tr>
-<tr><td>23</td><td>Bachelor of Communication (Hons)</td><td>Creative Industries</td><td>3 yrs</td><td>9</td><td>RM44,950</td><td>RM500</td><td>21,350</td><td>15,750</td><td>15,750</td><td>–</td><td>52,850</td></tr>
-<tr><td>24</td><td>Bachelor of Accounting & Finance (Hons)</td><td>Business</td><td>3 yrs</td><td>9</td><td>RM44,950</td><td>RM500</td><td>21,350</td><td>15,750</td><td>15,750</td><td>–</td><td>52,850</td></tr>
-<tr><td>25</td><td>Bachelor of Business & Management (Hons)</td><td>Business</td><td>3 yrs</td><td>9</td><td>RM44,950</td><td>RM500</td><td>21,350</td><td>15,750</td><td>15,750</td><td>–</td><td>52,850</td></tr>
-    </table>
-    <div class="note">
-      <div class="download-bar" onclick="downloadPDF('foundation')">
-  <span>Download PDF</span>
-  <span>⬇️</span>
-</div>
-      <strong>Misc Fees:</strong><br>
-      Visa & Application: RM3,150<br>
-      International Fee: RM8,000<br>
-      Completion Fee: RM1,000<br>
-      <strong>Total Misc: RM12,150</strong><br><br>
-      <strong>Payment Schedule:</strong><br>
-      1st: RM3,150 (Visa & App Fee)<br>
-      2nd: 50% Year 1 Tuition + RM8,000 + RM1,000 + Resource Fee (Year 1)<br>
-      Assessment Fee: RM25/subject
+<footer id="contact">
+    <div class="footer-container">
+      <div class="office left">
+        <p><strong>Bangladesh Office</strong><br>
+        Aot# A5, House: 16, Road: 2/3, Block L<br>
+        Bonani, Chairman Bari, Dhanmondi 1213</p>
+      </div>
+
+      <div class="footer-logo">
+        <img src="ys_logo.png" alt="YS Logo">
+      </div>
+
+      <div class="office right">
+        <p><strong>Malaysia Office</strong><br>
+        De Tropicana, 52, Jalan Kuchai Maju 13<br>
+        Kuchai Entrepreneurs Park<br>
+        58200 Kuala Lumpur, Malaysia</p>
+      </div>
     </div>
-  </div>
 
+    <div class="footer-bottom">
+      <div class="menu">
+        <div class="toggle">
+          <ion-icon name="share-social"></ion-icon>
+        </div>
+        <li style="--i: 0; --clr: #1877f2">
+          <a href="https://web.facebook.com/people/YS-Study-Focus/61571694410231/?_rdc=1&_rdr" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        </li>
+        <li style="--i: 2; --clr: #25d366">
+          <a href="https://wa.me/601139660706" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </li>
+        <li style="--i: 4; --clr: #ff0000">
+          <a href="https://youtube.com/@sabrina367sabu?si=GRfgbwVUAxxH5Ke_" target="_blank"><i class="fab fa-youtube"></i></a>
+        </li>
+        <li style="--i: 6; --clr: #000000">
+          <a href="https://www.tiktok.com/@sabu_555?_r=1&_t=ZS-92OvdlsEIcy" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </li>
+      </div>
+    </div>
+  </footer>
 
-  <!-- MASTERS -->
-<button class="accordion">MASTERS PROGRAMS</button>
-<div class="panel">
-  <table>
-    <tr>
-      <th>No</th><th>Programme</th><th>Duration</th><th>Tuition Fees (Promo)</th><th>Resource Fee/Sem</th><th>Total</th>
-    </tr>
-    <tr><td>1</td><td>Master of Business Administration (MBA)</td><td>1 year</td><td>RM17,278</td><td>RM500</td><td>RM30,148</td></tr>
-    <tr><td>2</td><td>Master of Science in Business Administration (By Research) (MSCBA)</td><td>2 years</td><td>RM23,813</td><td>RM500</td><td>RM36,683</td></tr>
-    <tr><td>3</td><td>Master of Information Technology (MIT)</td><td>1 year</td><td>RM17,278</td><td>RM500</td><td>RM30,148</td></tr>
-    <tr><td>4</td><td>Master of Accounting (MACE)</td><td>1 year</td><td>RM17,278</td><td>RM500</td><td>RM30,148</td></tr>
-    <tr><td>5</td><td>Master of Education (MED)</td><td>1 year</td><td>RM17,276</td><td>RM500</td><td>RM30,148</td></tr>
-    <tr><td>6</td><td>Master of Architecture (M.ARC)</td><td>2 years</td><td>RM22,813</td><td>RM500</td><td>RM35,683</td></tr>
-    <tr><td>7</td><td>Master of Mechanical Engineering (MME)</td><td>1 year</td><td>RM17,278</td><td>RM500</td><td>RM30,148</td></tr>
-    <tr><td>8</td><td>Master of Sport Studies (MSS) By Research</td><td>2 years</td><td>RM23,813</td><td>RM500</td><td>RM36,683</td></tr>
-    <tr><td>9</td><td>Master of Creative Industries and Communication (MCIC)</td><td>1 year</td><td>RM17,278</td><td>RM500</td><td>RM30,148</td></tr>
-    <tr><td>10</td><td>Master of Architecture Project Management (MAPM)</td><td>1 year</td><td>RM22,313</td><td>RM500</td><td>RM35,183</td></tr>
-  </table>
-  <div class="note">
-    <div class="download-bar" onclick="downloadPDF('foundation')">
-  <span>Download PDF</span>
-  <span>⬇️</span>
+<div class="developer-bar" style="background-color: #002040; color: #ccc; padding: 10px 0; text-align: center; font-size: 12px; width: 100%;">
+  Developed by: Bhuiyan Mohamed Nahid Jahan.
 </div>
-    <strong>Misc Fees:</strong><br>
-    Visa (EMGS) & Application Processing Fee: RM3,810<br>
-    International Student Fee: RM8,000<br>
-    Completion Processing Fee: RM1,060<br>
-    <strong>Total Misc: RM12,870</strong><br><br>
-    <strong>Payment Schedule:</strong><br>
-    1st: RM3,810 (Visa & App Fee)<br>
-    2nd: 50% Tuition + RM8,000 + RM1,060 + Resource Fee (RM500 × Semesters)<br>
-    Assessment Fee: RM25/subject
-  </div>
-</div>
+  </footer>
 
-<!-- PHD -->
-<button class="accordion">PHD PROGRAMS</button>
-<div class="panel">
-  <table>
-    <tr>
-      <th>No</th><th>Programme</th><th>Duration</th><th>Tuition Fees (Promo)</th><th>Resource Fee/Sem</th><th>Total</th>
-    </tr>
-    <tr><td>1</td><td>Doctor of Business Administration (DBA)</td><td>3 years</td><td>RM41,128</td><td>RM500</td><td>RM53,998</td></tr>
-    <tr><td>2</td><td>Doctor of Education (DE)</td><td>3 years</td><td>RM41,228</td><td>RM500</td><td>RM53,998</td></tr>
-    <tr><td>3</td><td>Doctor of Philosophy in Business Administration (PhDBA)</td><td>3 years</td><td>RM41,128</td><td>RM500</td><td>RM53,998</td></tr>
-    <tr><td>4</td><td>Doctor of Philosophy in Design (PhD Design)</td><td>3 years</td><td>RM41,128</td><td>RM500</td><td>RM53,998</td></tr>
-    <tr><td>5</td><td>Doctor of Philosophy in Education (PhD Edu)</td><td>3 years</td><td>RM41,128</td><td>RM500</td><td>RM53,998</td></tr>
-    <tr><td>6</td><td>Doctor of Philosophy in Information Technology (PhD IT)</td><td>3 years</td><td>RM41,228</td><td>RM500</td><td>RM53,998</td></tr>
-    <tr><td>7</td><td>Doctor of Philosophy in Sport Studies (PhD SS)</td><td>3 years</td><td>RM41,128</td><td>RM500</td><td>RM53,998</td></tr>
-    <tr><td>8</td><td>Doctor of Philosophy in Performing Art (PhD PA)</td><td>3 years</td><td>RM41,128</td><td>RM500</td><td>RM53,998</td></tr>
-    <tr><td>9</td><td>Doctor of Philosophy in Built Environment (PhD BE)</td><td>3 years</td><td>RM41,128</td><td>RM500</td><td>RM53,998</td></tr>
-    <tr><td>10</td><td>Doctor of Philosophy in Engineering</td><td>3 years</td><td>RM53,996</td><td>RM500</td><td>RM53,998</td></tr>
-  </table>
-  <div class="note">
-    <div class="download-bar" onclick="downloadPDF('foundation')">
-  <span>Download PDF</span>
-  <span>⬇️</span>
-</div>
-    <strong>Misc Fees:</strong><br>
-    Visa (EMGS) & Application Processing Fee: RM3,810<br>
-    International Student Fee: RM8,000<br>
-    Completion Processing Fee: RM1,060<br>
-    <strong>Total Misc: RM12,870</strong><br><br>
-    <strong>Payment Schedule:</strong><br>
-    1st: RM3,810 (Visa & App Fee)<br>
-    2nd: 50% Tuition + RM8,000 + RM1,060 + Resource Fee (RM500 × Semesters)<br>
-    Assessment Fee: RM25/subject
-  </div>
-</div>
-
-
-<footer>
-  <p>&copy; 2025 City University Malaysia.</p>
-</footer>
-
-<!-- JavaScript to handle accordion and search -->
-<script>
-  // Initialize accordions
-  const acc = document.querySelectorAll(".accordion");
-  acc.forEach(btn => {
-    btn.addEventListener("click", function() {
-      this.classList.toggle("active");
-      const panel = this.nextElementSibling;
-      panel.style.display = panel.style.display === "block" ? "none" : "block";
-    });
-  });
-
-  // Search function
-  function filterPrograms() {
-  const input = document.getElementById("searchInput").value.toLowerCase();
-  const tables = document.querySelectorAll("table");
-
-  tables.forEach(table => {
-    const rows = table.querySelectorAll("tr");
-    let foundInTable = false;
-
-    // Skip header row
-    for (let i = 1; i < rows.length; i++) {
-      const rowText = rows[i].textContent.toLowerCase();
-      if (rowText.includes(input)) {
-        rows[i].style.display = "";
-        rows[i].classList.add("highlight");
-        foundInTable = true;
-      } else {
-        rows[i].style.display = "none";
-        rows[i].classList.remove("highlight");
+ <script>
+  let ALL_PROGRAMS = []; // Global array to hold ALL universities and their programs
+  
+  // 1. Fetch data from the universities.json file on page load
+  async function fetchAllPrograms() {
+    try {
+      // The relative path is correct since universities.json is in the root
+      const response = await fetch('universities.json');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
+      ALL_PROGRAMS = await response.json();
+      console.log("Programs data loaded successfully.");
+    } catch (error) {
+      console.error("Could not fetch programs data:", error);
+      document.getElementById('searchResults').innerHTML = '<p style="color: red;">Error loading university data. Please try again later.</p>';
     }
-
-    const panel = table.closest(".panel");
-    const accordion = panel.previousElementSibling;
-    const note = panel.querySelector(".note");
-
-    if (foundInTable) {
-      panel.style.display = "block";
-      accordion.classList.add("active");
-      if (note) note.style.display = "block"; // show note
-    } else {
-      panel.style.display = "none";
-      accordion.classList.remove("active");
-      if (note) note.style.display = "none"; // hide note
-    }
-  });
-}
-
-function downloadPDF(programKey) {
-  const key = "cityu_pdf_download_time_" + programKey;
-  const lastDownload = localStorage.getItem(key);
-  const now = new Date().getTime();
-
-  if (lastDownload) {
-    const confirmDownload = confirm("You already downloaded this Fees Structure. Download again?");
-    if (!confirmDownload) return; // user clicked NO
   }
 
-  // Store timestamp
-  localStorage.setItem(key, now);
+  // 2. The Universal Search function
+  function searchUniversities() {
+    const input = document.getElementById("subjectInput").value.toLowerCase().trim();
+    const resultBox = document.getElementById("searchResults");
+    resultBox.innerHTML = "";
+    
+    if (input.length < 3) {
+      resultBox.innerHTML = "<p>Start typing a subject name (e.g., 'Law', 'Film', 'Nursing').</p>";
+      return;
+    }
 
-  // Trigger file download
-  const link = document.createElement("a");
-  link.href = "https://github.com/yourusername/yourrepo/cityu-fees-2025.pdf"; // replace with actual link
-  link.download = "CityU_Fee_Structure_2025.pdf";
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+    let foundResults = [];
+    const searchTerms = input.split(' ').filter(term => term.length > 0);
+    
+    // Search ALL programs across ALL universities loaded from the JSON
+    ALL_PROGRAMS.forEach(uni => {
+      const universityName = uni.name;
+      const universityLink = uniLinks[universityName]; // Get link from hardcoded map
+      
+      uni.programs.forEach(program => {
+        const programNameLower = program.name.toLowerCase();
+        
+        // Check if ALL search terms exist in the program name
+        const allTermsMatch = searchTerms.every(term => programNameLower.includes(term));
+        
+        if (allTermsMatch) {
+          // Determine the campus/entity name for display, especially for groups like BAC
+          let campusName = program.campus ? ` (${program.campus})` : '';
+
+          // Add only unique program entries to the results array
+          const identifier = universityName + program.name + campusName;
+          if (!foundResults.some(item => item.identifier === identifier)) {
+            foundResults.push({
+              identifier: identifier,
+              uni: universityName,
+              campus: program.campus,
+              program: program.name,
+              link: universityLink
+            });
+          }
+        }
+      });
+    });
+
+    // 3. Display Results
+    if (foundResults.length > 0) {
+      foundResults.forEach(match => {
+        const campusDisplay = match.campus ? ` (${match.campus})` : '';
+        const encodedProgram = encodeURIComponent(match.program);
+        
+        // Use the uni link to create the 'Go to Fees' button
+        const linkButton = match.link 
+          ? `<button onclick="window.location.href='${match.link}?q=${encodedProgram}';" class="go-to-fees">Go to Fees</button>` 
+          : `<button disabled>Page not linked</button>`;
+          
+        resultBox.innerHTML += `
+          <p>${match.uni}${campusDisplay} offers ${match.program} ${linkButton}</p>
+        `;
+      });
+    } else {
+      resultBox.innerHTML = "<p style='color: red;'>No university program found matching your search term.</p>";
+    }
+  }
+
+  // Define uniLinks outside the function so the search can use it
+  const uniLinks = {
+    "City University Malaysia": "city-university.html",
+    "Infrastructure University Kuala Lumpur (IUKL)": "iukl-fees.html",
+    "BAC EDUCATION GROUP": "bac-university.html",
+    "ALFA UNIVERSITY MALAYSIA": "alfa-university.html",
+    "INTI International University": "inti-university.html",
+    "UNIVERSITY OF CYBERJAYA": "university-of-cyberjaya.html",
+    "University College MAIWP International (UCMI)": "ucmi-university.html",
+    "CYBERNETICS MALAYSIA (KTAC)": "cybernetix-university.html",
+    "GENOVASI UNIVERSITY MALAYSIA": "genovasi-university.html",
+    "SEGI UNIVERSITY MALAYSIA": "segi-university.html"
+  };
+
+  function toggleMenu() {
+    const menu = document.getElementById('navMenu');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  }
+
+  // Run the fetch function on page load
+  document.addEventListener('DOMContentLoaded', fetchAllPrograms);
+  function updateStudentCount() {
+  // 1. Set the date you want the count to start from (Year, Month index 0-11, Day)
+  // Example: Dec 21, 2025
+  const startDate = new Date(2025, 11, 21); 
+  const today = new Date();
+  
+  // 2. Calculate the difference in milliseconds
+  const diffInMs = today - startDate;
+  
+  // 3. Convert milliseconds to weeks (1000ms * 60s * 60m * 24h * 7d)
+  const weeksPassed = Math.floor(diffInMs / (1000 * 60 * 60 * 24 * 7));
+  
+  // 4. Starting number (68) + weeks passed
+  const currentCount = 68 + (weeksPassed > 0 ? weeksPassed : 0);
+  
+  // 5. Update the HTML element
+  const countElement = document.getElementById("dynamicStudentCount");
+  if (countElement) {
+    countElement.innerText = currentCount + "+";
+  }
 }
 
+// Run the function when the page loads
+document.addEventListener('DOMContentLoaded', updateStudentCount);
+
+function scrollToSearch() {
+  const searchSection = document.querySelector(".search-section");
+  if (searchSection) {
+    searchSection.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+function createFirework() {
+  const container = document.querySelector('.contact-cta-section');
+  const collage = document.getElementById('collage-end');
+  const rect = collage.getBoundingClientRect();
+  const sectionRect = container.getBoundingClientRect();
+
+  // Firework colors: Yellow, Blue, Red, White (Malaysia Flag)
+  const colors = ['#FFCC00', '#003399', '#CC0000', '#FFFFFF'];
+
+  // Position at the end of the 3rd photo
+  const originX = rect.right - sectionRect.left;
+  const originY = rect.top - sectionRect.top + 50;
+
+  for (let i = 0; i < 30; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    
+    particle.style.backgroundColor = color;
+    particle.style.left = originX + 'px';
+    particle.style.top = originY + 'px';
+    particle.style.boxShadow = `0 0 10px ${color}`;
+    
+    container.appendChild(particle);
+
+    const angle = Math.random() * Math.PI * 2;
+    const velocity = Math.random() * 6 + 2;
+    const destinationX = Math.cos(angle) * 120;
+    const destinationY = Math.sin(angle) * 120;
+
+    const animation = particle.animate([
+      { transform: 'translate(0, 0)', opacity: 1 },
+      { transform: `translate(${destinationX}px, ${destinationY}px)`, opacity: 0 }
+    ], {
+      duration: 1000 + Math.random() * 500,
+      easing: 'cubic-bezier(0, .9, .57, 1)'
+    });
+
+    animation.onfinish = () => particle.remove();
+  }
+}
+
+// Trigger fireworks every 4 seconds (matches the plane animation)
+setInterval(createFirework, 4000);
+
+</script>
+<script>
+  const menu = document.querySelector(".menu");
+  const toggle = document.querySelector(".toggle");
+  if(toggle) {
+    toggle.addEventListener("click", () => {
+      menu.classList.toggle("active");
+    });
+  }
 
 
 </script>
 
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
