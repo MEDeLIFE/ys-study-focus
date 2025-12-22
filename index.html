@@ -12,9 +12,11 @@
       font-family: Arial, sans-serif;
     }
     body {
-      background-color: #f8f8f8;
-      color: #333;
-    }
+  background-color: #f8f8f8;
+  color: #333;
+  overflow-x: hidden; /* Add this to prevent horizontal scrolling */
+  width: 100%;        /* Ensure it stays locked to viewport width */
+}
     header {
       position: relative;
       height: 100vh;
@@ -246,8 +248,8 @@
 
 .search-bar {
   padding: 10px 15px;
-  width: 250px;
-  max-width: 80%;
+  width: 100%;      /* Change from 250px */
+  max-width: 400px; /* Allows it to grow on desktop but stay contained */
   border: 2px solid #007BFF;
   border-radius: 25px;
   font-size: 16px;
@@ -281,11 +283,12 @@
 }
 .uni-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5 columns */
-  grid-template-rows: repeat(2, auto);   /* 2 rows */
+  /* This automatically fits as many 150px columns as possible */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
   gap: 10px;
   max-width: 1000px;
   margin: 10px auto 0;
+  width: 90%; /* Ensures it doesn't touch screen edges on mobile */
 }
 
 .uni-grid div {
@@ -571,7 +574,6 @@
   transform: rotate(calc(360deg / -8 * var(--i))); 
 }
 
-/* --- NEW CONTACT SECTION STYLES --- */
 .contact-cta-section {
   display: flex;
   align-items: center;
@@ -580,6 +582,8 @@
   background-color: #ffffff;
   gap: 50px;
   flex-wrap: wrap;
+  overflow: hidden; /* Add this to "clip" the plane and fireworks */
+  position: relative;
 }
 
 .contact-left {
@@ -691,14 +695,21 @@
   z-index: 5;
 }
 
-@media (max-width: 768px) {
-  .contact-cta-section {
-    text-align: center;
-    padding: 60px 20px;
+@media (max-width: 480px) {
+  .text-overlay h1 {
+    font-size: 20px; /* Smaller font for small phones */
   }
-  .contact-right {
-    order: -1; 
-    margin-bottom: 30px;
+  .text-overlay {
+    top: 20%; /* Move up slightly to avoid covering faces in background */
+  }
+  .contact-left h2 {
+    font-size: 32px; /* Prevent massive title from breaking layout */
+  }
+  .whatsapp-btn {
+    padding: 15px 25px;
+    font-size: 16px;
+    width: 100%; /* Full width button is easier to click on mobile */
+    justify-content: center;
   }
 }
 
@@ -738,6 +749,37 @@
   pointer-events: none;
   z-index: 101;
 }
+
+
+/* Update 1: Modern Bento Grid for University Cards */
+.uni-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; /* Forces responsiveness */
+    gap: 1.5rem !important;
+    max-width: 1100px !important;
+    padding: 20px;
+}
+
+.uni-grid div {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px); 
+    border-radius: 20px !important; /* Modern rounded look */
+    padding: 1.5rem !important;
+    border: 1px solid #eee !important;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 120px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.uni-grid div:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    border-color: #007BFF !important;
+}
+
 
   </style>
 </head>
@@ -954,48 +996,72 @@
   }
 
   // 2. The Universal Search function
-  function searchUniversities() {
+  // Update 2: Debounced Search with optimized logic
+function searchUniversities() {
     const input = document.getElementById("subjectInput").value.toLowerCase().trim();
     const resultBox = document.getElementById("searchResults");
-    resultBox.innerHTML = "";
     
     if (input.length < 3) {
-      resultBox.innerHTML = "<p>Start typing a subject name (e.g., 'Law', 'Film', 'Nursing').</p>";
-      return;
+        resultBox.innerHTML = "<p>Start typing a subject name (e.g., 'Law', 'Nursing').</p>";
+        return;
     }
 
+    // High-performance filtering
+    const searchTerms = input.split(' ');
     let foundResults = [];
-    const searchTerms = input.split(' ').filter(term => term.length > 0);
-    
-    // Search ALL programs across ALL universities loaded from the JSON
-    ALL_PROGRAMS.forEach(uni => {
-      const universityName = uni.name;
-      const universityLink = uniLinks[universityName]; // Get link from hardcoded map
-      
-      uni.programs.forEach(program => {
-        const programNameLower = program.name.toLowerCase();
-        
-        // Check if ALL search terms exist in the program name
-        const allTermsMatch = searchTerms.every(term => programNameLower.includes(term));
-        
-        if (allTermsMatch) {
-          // Determine the campus/entity name for display, especially for groups like BAC
-          let campusName = program.campus ? ` (${program.campus})` : '';
 
-          // Add only unique program entries to the results array
-          const identifier = universityName + program.name + campusName;
-          if (!foundResults.some(item => item.identifier === identifier)) {
-            foundResults.push({
-              identifier: identifier,
-              uni: universityName,
-              campus: program.campus,
-              program: program.name,
-              link: universityLink
-            });
-          }
-        }
-      });
+    ALL_PROGRAMS.forEach(uni => {
+        uni.programs.forEach(program => {
+            const programNameLower = program.name.toLowerCase();
+            const uniNameLower = uni.name.toLowerCase();
+            
+            // Matches if search terms are found in program OR university name
+            const isMatch = searchTerms.every(term => 
+                programNameLower.includes(term) || uniNameLower.includes(term)
+            );
+            
+            if (isMatch) {
+                foundResults.push({
+                    uni: uni.name,
+                    program: program.name,
+                    link: uniLinks[uni.name],
+                    id: btoa(uni.name + program.name).substring(0, 8) // Unique ID for shortlisting
+                });
+            }
+        });
     });
+
+    renderResults(foundResults);
+}
+
+// Helper to render the search results with Shortlist & Dynamic WhatsApp
+function renderResults(results) {
+    const resultBox = document.getElementById("searchResults");
+    resultBox.innerHTML = "";
+
+    if (results.length === 0) {
+        resultBox.innerHTML = "<p style='color: red;'>No programs found.</p>";
+        return;
+    }
+
+    results.forEach(match => {
+        const waLink = `https://wa.me/601139660706?text=${encodeURIComponent("Hello! I am interested in " + match.program + " at " + match.uni)}`;
+        
+        resultBox.innerHTML += `
+            <div class="search-result-item" style="background: white; margin: 10px auto; padding: 15px; border-radius: 12px; max-width: 600px; border: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                <div style="text-align: left; flex: 1;">
+                    <strong style="color: #004080;">${match.uni}</strong><br>
+                    <span style="font-size: 14px;">${match.program}</span>
+                </div>
+                <div style="display: flex; gap: 5px;">
+                    <button onclick="window.location.href='${match.link}'" style="background: #007BFF; color: white; padding: 8px 12px; border-radius: 5px; border: none; cursor: pointer;">View Fees</button>
+                    <button onclick="window.open('${waLink}', '_blank')" style="background: #25d366; color: white; padding: 8px 12px; border-radius: 5px; border: none; cursor: pointer;"><i class="fab fa-whatsapp"></i></button>
+                    <button onclick="toggleShortlist('${match.id}')" id="btn-${match.id}" style="background: #eee; color: #333; padding: 8px 12px; border-radius: 5px; border: none; cursor: pointer;"><i class="far fa-heart"></i></button>
+                </div>
+            </div>
+        `;
+    });
+}
 
     // 3. Display Results
     if (foundResults.length > 0) {
@@ -1125,6 +1191,23 @@ setInterval(createFirework, 4000);
     });
   }
 
+// Update 3: Shortlist Mechanism
+function toggleShortlist(id) {
+    let shortlist = JSON.parse(localStorage.getItem('yss_shortlist')) || [];
+    const btn = document.getElementById(`btn-${id}`);
+    
+    if (shortlist.includes(id)) {
+        shortlist = shortlist.filter(item => item !== id);
+        btn.style.color = "#333";
+        btn.innerHTML = '<i class="far fa-heart"></i>';
+    } else {
+        shortlist.push(id);
+        btn.style.color = "red";
+        btn.innerHTML = '<i class="fas fa-heart"></i>';
+    }
+    
+    localStorage.setItem('yss_shortlist', JSON.stringify(shortlist));
+}
 
 </script>
 
